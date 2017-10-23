@@ -18,11 +18,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
 <meta charset="utf-8">
-<title>jQuery File Upload Demo</title>
+<title>SınavMatiko</title>
 <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap styles -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 <!-- Generic page styles -->
 <link rel="stylesheet" href="css/style.css">
 <!-- blueimp Gallery styles -->
@@ -43,59 +44,60 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
+            <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">SınavMatik</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="https://github.com/blueimp/jQuery-File-Upload/tags">Download</a></li>
-                <li><a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a></li>
-                <li><a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a></li>
-                <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
+                <li><a href="http://yucelkilic.com/contact/">İletişim</a></li>
+                <li><a href="http://yucelkilic.com/">Yücel KILIÇ</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>jQuery File Upload Demo</h1>
-    <h2 class="lead">Basic Plus UI version</h2>
+    <h1>SınavMatik Test Oluşturucu</h1>
     <ul class="nav nav-tabs">
-        <li><a href="basic.html">Basic</a></li>
-        <li><a href="basic-plus.html">Basic Plus</a></li>
-        <li class="active"><a href="index.html">Basic Plus UI</a></li>
-        <li><a href="angularjs.html">AngularJS</a></li>
-        <li><a href="jquery-ui.html">jQuery UI</a></li>
+        <li class="active"><a href="index.php">SınavMatik</a></li>
     </ul>
     <br>
-    <blockquote>
-        <p>File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery.<br>
-        Supports cross-domain, chunked and resumable file uploads and client-side image resizing.<br>
-        Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.</p>
-    </blockquote>
+    <form class="form-inline">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Ders Seçiniz:</label>
+        <select class="selectpicker show-tick data-width="fit">
+          <option selected>Matematik</option>
+          <option value="1">Fizik</option>
+          <option value="2">Kimya</option>
+          <option value="3">Biyoloji</option>
+          <option value="4">Türkçe</option>
+          <option value="5">Tarih</option>
+          <option value="6">Coğrafya</option>
+          <option value="7">Felsefe</option>
+        </select>
+    </form>
     <br>
     <!-- The file upload form used as target for the file upload widget -->
-    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+    <form id="fileupload" action="" method="POST" enctype="multipart/form-data">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
-        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+        <!-- <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span>Add files...</span>
-                    <input type="file" name="files[]" multiple>
+                    <span>Soru ekle...</span>
+                    <input id="fileupload" type="file" name="files[]" multiple>
                 </span>
-                <button type="submit" class="btn btn-primary start">
+                <button id="tumunuyukle" type="submit" class="btn btn-primary start">
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start upload</span>
+                    <span>Tümünü Yükle</span>
                 </button>
                 <button type="reset" class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel upload</span>
+                    <span>İptal et</span>
                 </button>
                 <button type="button" class="btn btn-danger delete">
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
+                    <span>Sil</span>
                 </button>
                 <input type="checkbox" class="toggle">
                 <!-- The global file processing state -->
@@ -114,19 +116,84 @@
         <!-- The table listing the files available for upload/download -->
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
     </form>
+    
+    <form action="index.php" method="POST" role="form" class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary pull-left" name="olustur">
+                    <i class="glyphicon glyphicon-flag"></i>
+                    <span>PDF Oluştur</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    
+    <?php
+
+        if (isset($_POST['olustur'])) {
+            if (file_exists("test.tex")) {
+                unlink("test.tex");
+            } else {
+                echo "File not found.";
+            }
+            
+            $texpath = "test.tex";
+            
+            $texfile = fopen($texpath, "a") or die("Unable to open file!");            
+            $d = 'server/php/files/';
+            foreach(glob($d.'*.{jpg,JPG,jpeg,JPEG,png,PNG}',GLOB_BRACE) as $file){
+                $images[] =  basename($file);
+            }
+            
+            $texhead = file_get_contents("texhead.txt");
+            $texcontent = file_get_contents($texpath);
+            if ($texhead !== $texcontent)
+                file_put_contents($texpath, $texhead);
+	
+            fwrite($texfile, "\n		\\begin{questions}");
+            foreach($images as $image){
+		fwrite($texfile, "\n
+                    \\question
+                    \\hspace{1cm}
+                    \\raggedright
+                    \\noindent
+                    \\includegraphics[width=0.9\\columnwidth]{{$image}}
+                    \\vspace{\stretch{1}}");                
+
+            }
+            fwrite($texfile, "\n		\\end{questions}");
+            fwrite($texfile, "\n\\end{multicols}");
+            fwrite($texfile, "\n\\end{document}");
+            fclose($texfile);
+            
+            //$output = system("echo 'pass' | sudo -u ykilic /Library/TeX/texbin/pdflatex -output-directory /Users/ykilic/Sites/sinavmatik/ --interaction batchmode /Users/ykilic/Sites/sinavmatik/$texpath");
+            $output = system("/Library/TeX/texbin/pdflatex --interaction batchmode $texpath");
+            
+            if (file_exists("test.pdf")) {
+                echo "<div>";
+                //echo "<object data=\"test.pdf\" type=\"application/pdf\" width=\"100%\" height=\"800px\">"; 
+                //echo "<p>PDF okuyucu eklentisi yüklü olmayabilir!";
+                echo "<pre>PDF dosyasını bilgisayrınıza indirin:<a href=\"test.pdf\" class=\"btn btn-info btn-sm\"><span class=\"glyphicon glyphicon-save-file\"></span>İndir</a></pre>";
+                echo "</div>";
+                
+            } else {
+                echo "Dosya bulunamadı.";
+            }
+       
+       
+        } else {
+            //echo "The time is " . date('Y/m/d H:i:s');
+        }
+    ?>
     <br>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Demo Notes</h3>
+            <h3 class="panel-title">Önemli Notlar</h3>
         </div>
         <div class="panel-body">
             <ul>
-                <li>The maximum file size for uploads in this demo is <strong>999 KB</strong> (default file size is unlimited).</li>
-                <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-                <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
-                <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
-                <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
-                <li>Built with the <a href="http://getbootstrap.com/">Bootstrap</a> CSS framework and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+                <li>Sadece görüntü formatında (<strong>JPG, GIF, PNG</strong>) dosya yükleyiniz.</li>
+                <li>Sorularınız yüklendikten sonra oluşan testinizi PDF formatında indirebilirsiniz.</li>
             </ul>
         </div>
     </div>
@@ -141,6 +208,7 @@
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
 </div>
+
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -153,20 +221,20 @@
             <strong class="error text-danger"></strong>
         </td>
         <td>
-            <p class="size">Processing...</p>
+            <p class="size">İşleniyor...</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
                 <button class="btn btn-primary start" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
+                    <span>Yükle</span>
                 </button>
             {% } %}
             {% if (!i) { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>İptal</span>
                 </button>
             {% } %}
         </td>
@@ -203,13 +271,13 @@
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
+                    <span>Sil</span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>İptal</span>
                 </button>
             {% } %}
         </td>
@@ -225,8 +293,8 @@
 <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
 <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- blueimp Gallery script -->
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
@@ -251,5 +319,7 @@
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 </body>
 </html>

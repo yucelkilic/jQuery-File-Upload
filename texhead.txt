@@ -1,0 +1,54 @@
+\documentclass[a4paper, 12pt]{exam}
+\usepackage{lipsum}
+
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\graphicspath{ {server/php/files/} }
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+ 
+\usepackage{multicol}
+\usepackage{color}
+ 
+\usepackage{comment}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{$/$}
+
+\usepackage[a4paper,left=1.0cm,right=1cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Fizik}{Gözü yükseklerde olanlar için...}{\today}
+\runningheader{Fizik}{Deneme Sınavı}{\today}
+\firstpagefooter{Fizik}{\thepage}{Diğer sayfaya geçiniz \rightarrow}
+\firstpagefootrule
+\runningfootrule
+\runningfooter{Fizik}{\thepage}{Diğer sayfaya geçiniz \rightarrow}
+
+\renewcommand{\thequestion}{\bfseries\large\arabic{question}}
+
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{red}}
+
+\usepackage[printwatermark]{xwatermark}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\newsavebox\mybox
+\savebox\mybox{\tikz[color=red,opacity=0.1]\node{\includegraphics{logo}};}
+\newwatermark*[
+allpages,
+angle=0,
+scale=2,
+]{\usebox\mybox}
+
+\usepackage[space]{grffile}
+
+
+\begin{document}
+	\begin{multicols}{2}
+	%% []

@@ -1,3 +1,9 @@
 .DS_Store
 *.pyc
 node_modules
+*.aux
+test.log
+*.out
+test.pdf
+test.tex
+test.xwm
