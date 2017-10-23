@@ -44,7 +44,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">SınavMatik</a>
+            <a class="navbar-brand" href="index.php">SınavMatik</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -59,26 +59,26 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="index.php">SınavMatik</a></li>
     </ul>
-    <br>
-    <form class="form-inline">
-      <label class="mr-sm-2" for="inlineFormCustomSelect">Ders Seçiniz:</label>
-        <select class="selectpicker show-tick data-width="fit">
-          <option selected>Matematik</option>
-          <option value="1">Fizik</option>
-          <option value="2">Kimya</option>
-          <option value="3">Biyoloji</option>
-          <option value="4">Türkçe</option>
-          <option value="5">Tarih</option>
-          <option value="6">Coğrafya</option>
-          <option value="7">Felsefe</option>
-        </select>
-    </form>
-    <br>
     <!-- The file upload form used as target for the file upload widget -->
-    <form id="fileupload" action="" method="POST" enctype="multipart/form-data">
+    <form id="fileupload" action="index.php" method="POST" enctype="multipart/form-data">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <!-- <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <br>
+        <div>
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Ders Seçiniz:</label>
+            <select class="selectpicker" width="fit" name="ders" id="ders">
+              <option selected>Matematik</option>
+              <option value="Fizik">Fizik</option>
+              <option value="Kimya">Kimya</option>
+              <option value="Biyoloji">Biyoloji</option>
+              <option value="Türkçe">Türkçe</option>
+              <option value="Tarih">Tarih</option>
+              <option value="Coğrafya">Coğrafya</option>
+              <option value="Felsefe">Felsefe</option>
+            </select>
+        </div>
+        <br>
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
@@ -103,6 +103,15 @@
                 <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
             </div>
+            <br>
+            <div class="form-group">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary pull-left" name="olustur">
+                          <i class="glyphicon glyphicon-flag"></i>
+                          <span>PDF Oluştur</span>
+                </button>
+              </div>
+            </div>
             <!-- The global progress state -->
             <div class="col-lg-5 fileupload-progress fade">
                 <!-- The global progress bar -->
@@ -116,21 +125,12 @@
         <!-- The table listing the files available for upload/download -->
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
     </form>
-    
-    <form action="index.php" method="POST" role="form" class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-10">
-          <button type="submit" class="btn btn-primary pull-left" name="olustur">
-                    <i class="glyphicon glyphicon-flag"></i>
-                    <span>PDF Oluştur</span>
-          </button>
-        </div>
-      </div>
-    </form>
+   
     
     <?php
 
         if (isset($_POST['olustur'])) {
+            $ders = $_POST['ders'];
             if (file_exists("test.tex")) {
                 unlink("test.tex");
             } else {
@@ -149,7 +149,20 @@
             $texcontent = file_get_contents($texpath);
             if ($texhead !== $texcontent)
                 file_put_contents($texpath, $texhead);
-	
+            
+            fwrite($texfile, "\n\\begin{document}");
+            fwrite($texfile, "\n\\begin{multicols}{2}");
+            fwrite($texfile, "\n%% []\n");
+            fwrite($texfile, "\n\\pagestyle{headandfoot}");
+            fwrite($texfile, "\n\\firstpageheadrule");
+            fwrite($texfile, "\n\\runningheadrule");
+            fwrite($texfile, "\n\\firstpageheader{{$ders}}{Gözü yükseklerde olanlar için...}{\\today}");
+            fwrite($texfile, "\n\\runningheader{{$ders}}{Deneme Sınavı}{\\today}");
+            fwrite($texfile, "\n\\firstpagefooter{{$ders}}{\\thepage}{Diğer sayfaya geçiniz \\rightarrow}");
+            fwrite($texfile, "\n\\firstpagefootrule");
+            fwrite($texfile, "\n\\runningfootrule");
+            fwrite($texfile, "\n\\runningfooter{{$ders}}{\\thepage}{Diğer sayfaya geçiniz \\rightarrow}");
+            
             fwrite($texfile, "\n		\\begin{questions}");
             foreach($images as $image){
 		fwrite($texfile, "\n
