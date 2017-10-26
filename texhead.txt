@@ -19,16 +19,6 @@
 
 \usepackage[a4paper,left=1.0cm,right=1cm,top=2.5cm,bottom=2.5cm]{geometry}
 
-\pagestyle{headandfoot}
-\firstpageheadrule
-\runningheadrule
-\firstpageheader{Fizik}{Gözü yükseklerde olanlar için...}{\today}
-\runningheader{Fizik}{Deneme Sınavı}{\today}
-\firstpagefooter{Fizik}{\thepage}{Diğer sayfaya geçiniz \rightarrow}
-\firstpagefootrule
-\runningfootrule
-\runningfooter{Fizik}{\thepage}{Diğer sayfaya geçiniz \rightarrow}
-
 \renewcommand{\thequestion}{\bfseries\large\arabic{question}}
 
 \setlength{\columnseprule}{1pt}
@@ -48,7 +38,3 @@ scale=2,
 
 \usepackage[space]{grffile}
 
-
-\begin{document}
-	\begin{multicols}{2}
-	%% []
