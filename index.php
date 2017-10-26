@@ -76,6 +76,8 @@
               <option value="Tarih">Tarih</option>
               <option value="Coğrafya">Coğrafya</option>
               <option value="Felsefe">Felsefe</option>
+              <option value="Fen Bilimleri">Fen Bilimleri</option>
+              <option value="Sosyal Bilimler">Sosyal Bilimler</option>
             </select>
         </div>
         <br>
@@ -150,8 +152,6 @@
             if ($texhead !== $texcontent)
                 file_put_contents($texpath, $texhead);
             
-            fwrite($texfile, "\n\\begin{document}");
-            fwrite($texfile, "\n\\begin{multicols}{2}");
             fwrite($texfile, "\n%% []\n");
             fwrite($texfile, "\n\\pagestyle{headandfoot}");
             fwrite($texfile, "\n\\firstpageheadrule");
@@ -162,6 +162,9 @@
             fwrite($texfile, "\n\\firstpagefootrule");
             fwrite($texfile, "\n\\runningfootrule");
             fwrite($texfile, "\n\\runningfooter{{$ders}}{\\thepage}{Diğer sayfaya geçiniz \\rightarrow}");
+    
+            fwrite($texfile, "\n\\begin{document}");
+            fwrite($texfile, "\n\\begin{multicols}{2}");
             
             fwrite($texfile, "\n		\\begin{questions}");
             foreach($images as $image){
