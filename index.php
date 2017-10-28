@@ -67,7 +67,7 @@
         <br>
         <div>
             <label class="mr-sm-2" for="inlineFormCustomSelect">Ders Seçiniz:</label>
-            <select class="selectpicker" width="fit" name="ders" id="ders">
+            <select class="selectpicker" name="ders" id="ders">
               <option selected>Matematik</option>
               <option value="Fizik">Fizik</option>
               <option value="Kimya">Kimya</option>
@@ -81,13 +81,10 @@
             </select>
         </div>
         <br>
-        <div class="col-xs-4">
+        <div>
             <label>Başlık:</label>
             <input type="text" class="form-control" id="baslik" placeholder="Başlık giriniz..." value="Gözü yükseklerde olanlar için...">
         </div>
-        <br>        
-        <br>
-        <br>        
         <br>
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
