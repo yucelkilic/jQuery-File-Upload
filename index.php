@@ -81,6 +81,14 @@
             </select>
         </div>
         <br>
+        <div class="col-xs-4">
+            <label>Başlık:</label>
+            <input type="text" class="form-control" id="baslik" placeholder="Başlık giriniz..." value="Gözü yükseklerde olanlar için...">
+        </div>
+        <br>        
+        <br>
+        <br>        
+        <br>
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
@@ -133,6 +141,7 @@
 
         if (isset($_POST['olustur'])) {
             $ders = $_POST['ders'];
+            $ders = $_POST['baslik'];
             if (file_exists("test.tex")) {
                 unlink("test.tex");
             } else {
@@ -149,9 +158,10 @@
             
             $texhead = file_get_contents("texhead.txt");
             $texcontent = file_get_contents($texpath);
-            if ($texhead !== $texcontent)
+            if ($texhead !== $texcontent) {
                 file_put_contents($texpath, $texhead);
-            
+            }
+
             fwrite($texfile, "\n%% []\n");
             fwrite($texfile, "\n\\pagestyle{headandfoot}");
             fwrite($texfile, "\n\\firstpageheadrule");
