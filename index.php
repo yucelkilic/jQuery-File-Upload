@@ -83,9 +83,19 @@
         <br>
         <div>
             <label>Başlık:</label>
-            <input type="text" class="form-control" id="baslik" placeholder="Başlık giriniz..." value="Gözü yükseklerde olanlar için...">
+            <input type="text" class="form-control" id="baslik" placeholder="Başlık giriniz..." value="Gözü yükseklerde olanlar için..." name="baslik">
         </div>
         <br>
+        <div>
+            <label>Son Söz:</label>
+            <input type="text" class="form-control" id="sonsoz" placeholder="Test bitti." value="Test bitti." name="sonsoz">
+        </div>
+        <br>
+         <div>
+            <label class="mr-sm-2">Çözüm alanı boşluğu (inç):</label>
+            <input class="form-control" type="number" value="1" id="example-number-input" name="bosluk" min="1" max="10">
+        </div>
+        <br>       
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
@@ -138,7 +148,10 @@
 
         if (isset($_POST['olustur'])) {
             $ders = $_POST['ders'];
-            $ders = $_POST['baslik'];
+            $baslik = $_POST['baslik'];
+            $sonsoz = $_POST['sonsoz'];
+            $bosluk = $_POST['bosluk'];
+            
             if (file_exists("test.tex")) {
                 unlink("test.tex");
             } else {
@@ -163,12 +176,12 @@
             fwrite($texfile, "\n\\pagestyle{headandfoot}");
             fwrite($texfile, "\n\\firstpageheadrule");
             fwrite($texfile, "\n\\runningheadrule");
-            fwrite($texfile, "\n\\firstpageheader{{$ders}}{Gözü yükseklerde olanlar için...}{\\today}");
-            fwrite($texfile, "\n\\runningheader{{$ders}}{Deneme Sınavı}{\\today}");
+            fwrite($texfile, "\n\\firstpageheader{{$ders}}{{$baslik}}{\\today}");
+            fwrite($texfile, "\n\\runningheader{{$ders}}{{$baslik}}{\\today}");
             fwrite($texfile, "\n\\firstpagefooter{{$ders}}{\\thepage}{Diğer sayfaya geçiniz \\rightarrow}");
             fwrite($texfile, "\n\\firstpagefootrule");
             fwrite($texfile, "\n\\runningfootrule");
-            fwrite($texfile, "\n\\runningfooter{{$ders}}{\\thepage}{Diğer sayfaya geçiniz \\rightarrow}");
+            fwrite($texfile, "\n\\runningfooter{{$ders}}{\\thepage}{\\iflastpage{{$sonsoz}}{Diğer sayfaya geçiniz \\rightarrow}}");
     
             fwrite($texfile, "\n\\begin{document}");
             fwrite($texfile, "\n\\begin{multicols}{2}");
@@ -181,7 +194,7 @@
                     \\raggedright
                     \\noindent
                     \\includegraphics[width=0.9\\columnwidth]{{$image}}
-                    \\vspace{\stretch{1}}");                
+                    \\vspace*{\stretch{{$bosluk}}}");                
 
             }
             fwrite($texfile, "\n		\\end{questions}");
